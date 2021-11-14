@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Ponto.h"
+// #include "Ponto.h"
+#include "Ponto.c"
+
 int main(){
     float d;
     Ponto *p,*q;

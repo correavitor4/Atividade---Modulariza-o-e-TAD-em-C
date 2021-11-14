@@ -1,46 +1,68 @@
 #include <stdlib.h>
 #include <math.h>
-#include "Ponto.h" //inclui os Protótipos
+#include "Ponto.h" //inclui os Protï¿½tipos
 
-//Definição do tipo de dados
+//Definiï¿½ï¿½o do tipo de dados
 struct ponto{
-  float x;
-  float y;
+  float *vec;
 };
 //Aloca e retorna um ponto com coordenadas "x" e "y"
-Ponto* pto_cria(float x, float y){
+Ponto* pto_cria(float *vect,int vecSize){
+    //printf("DimensÃ£o: %d\n",vecSize);
     Ponto* p = (Ponto*) malloc(sizeof(Ponto));
-    if(p != NULL){
-        p->x = x;
-        p->y = y;
+    printf("\naaaa\n%d\naaaa\n",(vecSize)* (sizeof(float)));
+    p->vec = (float*) malloc(vecSize*sizeof(float));
+    printf("\n%d\n",sizeof(p->vec));
+
+    if(p!=NULL){
+        
+        for(int i=0;i<vecSize;i++){  
+            p->vec[i]=vect[i];
+            
+        }
     }
+    
     return p;
+
 }
-//Libera a memória alocada para um ponto
+//Libera a memï¿½ria alocada para um ponto
 void pto_libera(Ponto* p){
     free(p);
 }
-//Recupera, por referência, o valor de um ponto
-int pto_acessa(Ponto* p, float* x, float* y){
+//Recupera, por referï¿½ncia, o valor de um ponto
+int pto_acessa(Ponto* p,float *vec){
     if(p == NULL)
         return 0;
-    *x = p->x;
-    *y = p->y;
+        
+    for(int i=0;i<sizeof(vec);i++){
+        vec[i] = p->vec[i];
+    }
+    
     return 1;
 }
 //Atribui a um ponto as coordenadas "x" e "y"
-int pto_atribui(Ponto* p, float x, float y){
+int pto_atribui(Ponto* p,float *vec){
     if(p == NULL)
         return 0;
-    p->x = x;
-    p->y = y;
+    for(int i=0;i<sizeof(vec);i++){
+        p->vec[i]= vec[i];
+    }
+   
     return 1;
 }
-//Calcula a distância entre dois pontos
+//Calcula a distï¿½ncia entre dois pontos
 float pto_distancia(Ponto* p1, Ponto* p2){
+    float aux=0;
     if(p1 == NULL || p2 == NULL)
         return -1;
-    float dx = p1->x - p2->x;
-    float dy = p1->y - p2->y;
-    return sqrt(dx * dx + dy * dy);
+
+    printf("%d",sizeof(p1->vec));
+    for(int i=0;i<(sizeof(p1->vec)/sizeof(float));i++){
+        printf("aaaa");
+        aux+=pow((p2->vec[i]-p1->vec[i]),2);
+        printf("\n%f\n",aux);
+    }
+
+    
+    return sqrt(aux);
 }

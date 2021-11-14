@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Ponto.h"
+#include "Ponto.c"
 int main(){
     float d;
     Ponto *p,*q;
@@ -25,9 +25,11 @@ int main(){
     }
     
 
-
+    //printf("aaaaaa\n");
     p = pto_cria(vec1,i);
+    printf("Número de dimensões do ponto: %i\n",sizeof(p->vec)/sizeof(float));
     q = pto_cria(vec2,i);
+   printf("Número de dimensões do ponto: %i\n",sizeof(q->vec)/sizeof(float));  
     d = pto_distancia(p,q);
     printf("Distancia entre pontos: %f\n",d);
 
